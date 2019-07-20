@@ -85,3 +85,17 @@ const main = async () => {
 }
 
 main()
+// using .then (don't)
+
+const x =fs.readFile('somerandomfile.txt')
+  .then(val => {
+    return val.toString()
+  })
+  .then(valStr => {
+    // note; if you return a Promise in .then, the rest of the
+    // .then chain will use the resolved value from writeFile (if it returned one)
+    return fs.writeFile('someotherfile.txt', valStr.reverse())
+  })
+
+  // x is STILL a promise, if you want to work with resolved value you need
+  // to use .then
