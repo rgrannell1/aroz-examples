@@ -73,4 +73,15 @@ async function main() {
   console.log(hi)
 }
 
+// why use promises rather than direct values?
+const fs = require('fs').promises
 
+const main = async () => {
+  const content = await fs.readFile('somerandomfile.txt').toString()
+
+  console.log('file read')
+
+  await fs.writeFile('someotherfile.txt', content.reverse())
+}
+
+main()
