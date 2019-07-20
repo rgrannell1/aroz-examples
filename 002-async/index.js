@@ -49,3 +49,28 @@ async function main () {
 }
 
 main()
+
+// okay, so converting callback code to promise code
+
+const sendHi = callback => {
+  setTimeout(() => {
+    callback("hi")
+  }, 1000)
+}
+
+sendHi(hi => {
+  console.log(hi)
+})
+
+// now as a promise
+
+async function main() {
+  const sendHiPromise = new Promise(resolve => {
+    sendHi(hi => resolve(hi))
+  })
+
+  const hi = await sendHiPromise
+  console.log(hi)
+}
+
+
